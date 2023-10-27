@@ -1,12 +1,24 @@
+let computersChoice = '';
 
-let computersChoice = Math.random();
-if (computersChoice < 0.33) {
-    computersChoice = "rock";
-} else if (computersChoice < 0.67) {
-    computersChoice = "paper";
-} else {
-    computersChoice = "scissors";
-}
+// Function to set the player's choice
+const setPlayerChoice = (choice) => {
+    playerChoice = choice;
+    console.log("Player's choice:", playerChoice);
+};
+
+// Event listeners for the rock, paper, and scissors buttons
+document.getElementById("rockButton").addEventListener('click', () => {
+    setPlayerChoice("rock");
+});
+
+document.getElementById("paperButton").addEventListener('click', () => {
+    setPlayerChoice("paper");
+});
+
+document.getElementById("scissorsButton").addEventListener('click', () => {
+    setPlayerChoice("scissors");
+});
+
 
 let compare = (computer, player) => {
     if (computer === player) {
@@ -32,14 +44,31 @@ let compare = (computer, player) => {
     }
 }
 
-// Replace 'playerChoice' with the actual choice made by the player ('rock', 'paper', or 'scissors')
-let playerChoice = "paper"; // Replace this with the player's actual choice
-let result = compare(computersChoice, playerChoice);
+let playerChoice = ''; // Variable to store the player's choice
 
-let compareResults = document.getElementById("compareResults"); // Assuming you have an element with the ID "compareResults"
+let compareResults = document.getElementById("compareResults");
 
 compareResults.addEventListener('click', () => {
-    console.log("Computer's choice:", computersChoice);
-    console.log("Player's choice:", playerChoice);
-    console.log(result);
+    if (playerChoice) {
+        computersChoice = getComputersChoice(); // Function to generate the computer's choice
+        console.log("Computer's choice:", computersChoice);
+        let result = compare(computersChoice, playerChoice);
+        console.log(result);
+    } else {
+        console.log("Please select a choice before comparing.");
+    }
 });
+
+// Function to generate the computer's choice (similar to your original code)
+function getComputersChoice() {
+    let random = Math.random();
+    if (random < 0.33) {
+        return "rock";
+    } else if (random < 0.67) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
+}
+
+
